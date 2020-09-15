@@ -13,6 +13,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/Parking Lot/task" />
+            <option value="$PROJECT_DIR$/Problems/House inheritance" />
             <option value="$PROJECT_DIR$/util" />
           </set>
         </option>

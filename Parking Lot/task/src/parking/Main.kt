@@ -13,6 +13,9 @@ fun main() {
             "create" -> command[1].toIntOrNull()?.let { CarPark.create(it) }
             "leave"  -> CarPark.leave(command[1].toInt())
             "park" -> Car(command[1], command[2]).park()
+            "reg_by_color" -> CarPark.regByColor(command[1])
+            "spot_by_color" -> CarPark.spotsByColor(command[1])
+            "spot_by_reg" -> CarPark.spotByReg(command[1])
         }
     }
 
@@ -51,5 +54,35 @@ object CarPark {
             }
         }
     }
-
+    fun regByColor(color: String) {
+        if (spots.isEmpty()) return println("Sorry, a parking lot has not been created.")
+        val registrations = mutableListOf<String>()
+        for (car in spots) {
+            if (car != null && car.color.toLowerCase() == color.toLowerCase()) {
+                registrations += car.registration
+            }
+        }
+        if (registrations.isEmpty()) return println("No cars with color $color were found.")
+        println(registrations.joinToString(", "))
+    }
+    fun spotsByColor(color: String) {
+        if (spots.isEmpty()) return println("Sorry, a parking lot has not been created.")
+        val carSpots = mutableListOf<Int>()
+        for (spot in spots.indices) {
+            if (spots[spot] != null && spots[spot]?.color?.toLowerCase() == color.toLowerCase()) {
+                carSpots += spot + 1
+            }
+        }
+        if (carSpots.isEmpty()) return println("No cars with color $color were found.")
+        println(carSpots.joinToString(", "))
+    }
+    fun spotByReg(registration: String) {
+        if (spots.isEmpty()) return println("Sorry, a parking lot has not been created.")
+        for (spot in spots.indices) {
+            if (spots[spot] != null && spots[spot]?.registration == registration) {
+                return println(spot + 1)
+            }
+        }
+        return println("No cars with registration number $registration were found.")
+    }
 }
